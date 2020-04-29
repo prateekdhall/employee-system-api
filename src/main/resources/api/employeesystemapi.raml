@@ -1,0 +1,81 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/497063b3-4595-45e3-8973-a8126f80cc2e/ # 
+title: EmployeeSystemAPI
+
+types:
+  Employee: !include EmployeeCrudDataType.raml
+
+/employees:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Employee[]
+            examples:
+              output: !include Employees.raml
+
+  post:
+    body:
+      application/json:
+        type: Employee
+        examples:
+          input: !include Employee.raml
+
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: Employee added successfully.
+  /{ID}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Employee
+              examples:
+                output: !include Employee.raml
+    
+    put:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Employee
+              examples:
+                output: !include Employee.raml
+    
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              examples:
+                message: Employee deleted successfully
+
+  /filterByDate:
+    get:
+      queryParameters:
+        startdate:
+          displayName: Start Date
+          type: string
+          description: Join Start Date
+          example: 2020-10-04
+          required: false
+
+        enddate:
+          displayName: End Date
+          type: string  
+          description: Join End Date
+          example: 2020-10-05
+          required: false
+
+      responses:
+       200:
+        body:
+          application/json:
+            type: Employee[]
+            examples:
+              output: !include Employees.raml
