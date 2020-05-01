@@ -9,11 +9,11 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
 		<db:config name="Database_Config" doc:name="Database Config" doc:id="5e6adc4c-76c9-4cc4-9ef3-f939014fb2d3" >
-		<db:my-sql-connection host="${database.host}" port="${database.port}" user="${database.user}" password="${secure::database.password}" database="${database.db}" />
+		<db:my-sql-connection host="${database.host}" port="${database.port}" user="${secure::database.user}" password="${secure::database.password}" database="${database.db}" />
 	</db:config>
 	<configuration-properties doc:name="Configuration properties" doc:id="0bb22d4c-f90e-43d1-9be8-7f9bacf017ab" file="${env}.yaml" />
 	<global-property doc:name="Global Property" doc:id="ba671535-392b-4c80-bc18-0ce41adf62a2" name="env" value="employee-system-api-local" />
-	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="86d73dfc-2ac2-4c5c-940b-142784ad718d" file="${env}.yaml" key="${env}">
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="86d73dfc-2ac2-4c5c-940b-142784ad718d" file="${env}.yaml" key="employee">
 		<secure-properties:encrypt algorithm="Blowfish" />
 	</secure-properties:config>
 	<sub-flow name="postEmployeeSubFlow" doc:id="760e99d3-d8a3-41a1-8b28-8d4533cc68cf" >

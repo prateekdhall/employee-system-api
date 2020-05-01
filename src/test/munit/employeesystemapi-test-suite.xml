@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="employeesystemapi-test-suite.xml" />
+	<munit:test name="employeesystemapi-test-suite-get:\employees\filterByDate:employeesystemapi-configTest" doc:id="a1d3275e-5c94-462d-9158-487a120aaa47" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="f77de5f4-d245-40f0-ba32-53b8dc264183" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "queryParams": {"startdate": "2020-09-04","enddate": "2020-09-04"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to get:\employees\filterByDate:employeesystemapi-config" doc:id="3b2c48b9-40e7-46fc-a5d6-110dc880beed" name="get:\employees\filterByDate:employeesystemapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="778effd7-0a44-4bb7-885d-2bc0ebc2c220" is="#[MunitTools::notNullValue()]" message="#['payload is null']" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="employeesystemapi-test-suite-post:\employees:application\json:employeesystemapi-configTest" doc:id="86f1e098-b3ee-4e30-8c72-e44339a522c3" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="5887b01d-b9ce-4499-a166-65df356e02e7" cloneOriginalEvent="true">
+				<munit:payload value='{
+  "id": 29,	
+  "empid": 11,
+  "name": "er",
+  "email": "ssn@sapient.com",
+  "destination": "SAL2",
+  "nationality": "Indian",
+  "age": 25,
+  "joindate": "2020-09-15"
+}' mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to post:\employees:application\json:employeesystemapi-config" doc:id="4d5475b9-690a-41ce-9baa-6d6bcb2de218" name="post:\employees:application\json:employeesystemapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="de66ec42-0b6a-4e03-94d0-8f6b279c49cd" message="'payload is not null'" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="employeesystemapi-test-suite-get:\employees\(ID):employeesystemapi-configTest" doc:id="aed48a0d-fc73-46b9-8ec3-7ec16ed602eb" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="e751f447-31b1-424b-8c2e-d41d9b3d2e65" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "uriParams": {"id": "1"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to get:\employees\(ID):employeesystemapi-config" doc:id="152a2fd9-00fa-40a7-97bf-562d917eaf0c" name="get:\employees\(ID):employeesystemapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="c4bf9629-6667-44ca-8756-b83bd822283f" is="#[MunitTools::notNullValue()]" message="#['payload is null']" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="employeesystemapi-test-suite-get:\employees:employeesystemapi-configTest" doc:id="87de37cf-6878-4712-b039-8b4e628db768" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="c943e12a-a89c-48e4-a802-81cdb6ae2781" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "uriParams": {"id": "1"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to get:\employees:employeesystemapi-config" doc:id="ef957aef-29da-4490-be69-2937167c0949" name="get:\employees:employeesystemapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="46738b24-616b-4a06-a5ff-6733cdf801c4" message="'payload is null'" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="employeesystemapi-test-suite-delete:\employees\(ID):employeesystemapi-configTest" doc:id="a504301d-236d-48e7-b39a-c3e7226f5efa" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="3f2430c9-efc8-476c-afef-bafaefdd2045" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "uriParams": {"id": "1"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to delete:\employees\(ID):employeesystemapi-config" doc:id="fad7754e-9852-441e-8f69-0458606e6c55" name="delete:\employees\(ID):employeesystemapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="a3006494-db4c-4c46-afa4-ecb741f06721" message="'payload is not null'" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="employeesystemapi-test-suite-put:\employees\(ID):employeesystemapi-configTest" doc:id="f0a0cb53-bf49-4c92-bd3c-7078358516e8" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="dad01c41-97dd-46a2-a6b3-574c0e10aca1" cloneOriginalEvent="true">
+				<munit:payload value='{
+  "empid": 116475,
+  "name": "prateek",
+  "email": "pratee2@sapient.com",
+  "destination": "SAL2",
+  "nationality": "Indian",
+  "age": 20,
+  "joindate":"2020-05-01"
+}' />
+				<munit:attributes value='#[ { "uriParams": {"id": "1"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to put:\employees\(ID):employeesystemapi-config" doc:id="67dfa6aa-98d3-4528-b684-7d734080cc51" name="put:\employees\(ID):employeesystemapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="3c350535-bda4-49d2-9bd8-3990772ac00d" is="#[MunitTools::notNullValue()]" expression="#[payload]" message="#['payload is null']"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

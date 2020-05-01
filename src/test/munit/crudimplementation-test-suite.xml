@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="crudimplementation-test-suite.xml" />
+	<munit:test name="crudimplementation-test-suite-filterByDateSubFlowTest" doc:id="0eb242c1-5692-458e-90f7-49bfccc0c3a4" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="ee1e0485-3001-441a-bfef-e9cda989178c" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="filterByDateSubFlow" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="ecf4c2c9-10cc-4a93-a5ce-c8bb3e496c52" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="filterByDateSubFlow" attributeName="name" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="79f7dbf2-2657-48ac-afd1-b56930512b81" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "queryParams": {"startdate": "2020-09-04","enddate": "2020-09-04"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to filterByDateSubFlow" doc:id="323c46a0-c987-4683-b288-9d1be218383d" name="filterByDateSubFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="bd05838e-ab12-41f6-b9f6-e1106b9a308b" is="#[MunitTools::notNullValue()]" expression="#[payload]" message="#['payload is null']"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="crudimplementation-test-suite-getEmployeeByIdSubFlowTest" doc:id="8d87318e-1580-4a52-a39b-9a2ad98ed0a6" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="31347d32-e3b8-45a2-b28d-4d0e62688e96" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="getEmployeeByIdSubFlow" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="ae26997c-a44b-459c-802e-61bb589f8ef0" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="getEmployeeByIdSubFlow" attributeName="name" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="e8e075ee-59a1-4ac0-b15c-6c772029c9f3" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "uriParams": {"id": "3"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to getEmployeeByIdSubFlow" doc:id="8711a049-39b6-4215-ad67-c055b866ee01" name="getEmployeeByIdSubFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="dbbcc437-5099-4341-9c86-5696204cb67d" message="#['payload is null']" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="crudimplementation-test-suite-deleteEmployeeSubFlowTest" doc:id="3f6adc03-0284-434b-818c-a38982c2e643" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5fc8e687-b9b5-46d2-849f-80a1859f6d03" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="deleteEmployeeSubFlow" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="f87e1aa6-562b-4b5c-8baf-ed8e6f251d22" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="deleteEmployeeSubFlow" attributeName="name" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="66d37f8b-0dd3-488f-94e6-68546b86e602" cloneOriginalEvent="true">
+				<munit:attributes value='#[ { "uriParams": {"id": "3"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to deleteEmployeeSubFlow" doc:id="b6c45e64-d2ee-470b-bc12-074c2eb87b48" name="deleteEmployeeSubFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="715fdbc6-43e5-4425-b771-e72ae8c00cb1" is="#[MunitTools::notNullValue()]" message="#['EmpId not found']" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="crudimplementation-test-suite-putEmployeeSubFlowTest" doc:id="668f7bfa-91d3-4de7-a3fc-2ab230067203" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="33d0f98f-1e5c-4c24-a058-832c523ad4e9" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="putEmployeeSubFlow" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="aa8d9bdd-4bfe-4f71-8ba1-78b10e9fe081" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="putEmployeeSubFlow" attributeName="name" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="684bc9e9-cd3f-4976-be37-967ad86bbadc" cloneOriginalEvent="true">
+				<munit:payload value='{
+  "empid": 116475,
+  "name": "prateek",
+  "email": "pratee2@sapient.com",
+  "destination": "SAL2",
+  "nationality": "Indian",
+  "age": 20,
+  "joindate":"2020-05-01"
+}' mediaType="application/json" />
+				<munit:attributes value='#[ { "uriParams": {"id": "1"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to putEmployeeSubFlow" doc:id="7eec8da6-14fa-467c-b5ff-7b8b08f25b44" name="putEmployeeSubFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="06c2312d-21df-4958-8405-c345a64959a0" is="#[MunitTools::notNullValue()]" message="#['payload is null']" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="crudimplementation-test-suite-postEmployeeSubFlowTest" doc:id="42349a0d-ac78-407f-80a1-0b87c174d371" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="85c64f86-f161-4921-902f-29415a3ee5c4" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="postEmployeeSubFlow" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="cad2ed9e-1daa-4c01-be06-9280ecb7e497" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="postEmployeeSubFlow" attributeName="name" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="babe885e-83c8-4ba9-8c4f-10674d53006b" cloneOriginalEvent="true">
+				<munit:payload value='{
+  "id": 29,	
+  "empid": 11,
+  "name": "er",
+  "email": "ssn@sapient.com",
+  "destination": "SAL2",
+  "nationality": "Indian",
+  "age": 25,
+  "joindate": "2020-09-15"
+}' mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to postEmployeeSubFlow" doc:id="a5596742-c487-4108-965a-8745e29f2bc6" name="postEmployeeSubFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="f6c9938b-b0c7-485b-86fd-1a0dafbc7db0" is="#[MunitTools::notNullValue()]" message="#['payload is null']" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
